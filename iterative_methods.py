@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import math
+import scipy as sp
 
 import MetodosNoLineales
 import iterative_solvers
