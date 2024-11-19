@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import math
+import scipy as sp
 
 import MetodosNoLineales
 import iterative_solvers
@@ -80,11 +81,11 @@ def biseccion_pagina(cols, error,tol):
     with col3:
         n = st.number_input('# Iteraciones', value=100)
     if error == "Decimales Correctos":
-        aprox, table = MetodosNoLineales.bisection(function, a, b, tol, n)
+        aprox, table = MetodosNoLineales.biseccion(function, a, b, tol, n)
         st.write(aprox)
         st.dataframe(table)
     else:
-        aprox, table = MetodosNoLineales.bisection(function, a, b, tol, n,True)
+        aprox, table = MetodosNoLineales.biseccion(function, a, b, tol, n,True)
         st.write(aprox)
         st.dataframe(table)
 
@@ -178,11 +179,11 @@ def raices_multiples2_pagina(cols, error, tol):
         n = st.number_input('# Iteraciones', value=100)
 
     if error == "Decimales Correctos":
-        aprox, table = MetodosNoLineales.raices_multiples2(function, x0, tol, n)
+        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n)
         st.write(aprox)
         st.dataframe(table)
     else:
-        aprox, table = MetodosNoLineales.raices_multiples2(function, x0, tol, n,True)
+        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n,True)
         st.write(aprox)
         st.dataframe(table)
 

@@ -4,7 +4,7 @@ import streamlit as st
 from scipy.misc import derivative
 import matplotlib.pyplot as plt
 
-def bisection(function, a, b, tol, n, use_sig_digits=False):
+def biseccion(function, a, b, tol, n, use_sig_digits=False):
     # Verificar que la función es continua en [a, b]
     if function(a) * function(b) >= 0:
         print(f"El intervalo [{a},{b}] es inadecuado.")
@@ -21,7 +21,7 @@ def bisection(function, a, b, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x_m, make_table(x_m_list, f_list, errors)
+            return x_m, table(x_m_list, f_list, errors)
 
         if function(a) * f_x_m < 0:
             b = x_m
@@ -33,10 +33,10 @@ def bisection(function, a, b, tol, n, use_sig_digits=False):
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x_m, make_table(x_m_list, f_list, errors)
+                return x_m, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
 def regla_falsa(function, a, b, tol, n, use_sig_digits=False):
     if function(a) * function(b) >= 0:
@@ -54,7 +54,7 @@ def regla_falsa(function, a, b, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x_m, make_table(x_m_list, f_list, errors)
+            return x_m, table(x_m_list, f_list, errors)
 
         if function(a) * f_x_m < 0:
             b = x_m
@@ -66,10 +66,10 @@ def regla_falsa(function, a, b, tol, n, use_sig_digits=False):
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x_m, make_table(x_m_list, f_list, errors)
+                return x_m, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
 def secante(function, x0, x1, tol, n, use_sig_digits=False):
     errors = [100]
@@ -84,17 +84,17 @@ def secante(function, x0, x1, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x1, make_table(x_m_list, f_list, errors)
+            return x1, table(x_m_list, f_list, errors)
 
         if i > 0:
             error = calculate_error(use_sig_digits, x1, x_m_list, i)
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x1, make_table(x_m_list, f_list, errors)
+                return x1, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
 def newton(function, x0, tol, n, use_sig_digits=False):
     errors = [100]
@@ -112,17 +112,17 @@ def newton(function, x0, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x0, make_table(x_m_list, f_list, errors)
+            return x0, table(x_m_list, f_list, errors)
 
         if i > 0:
             error = calculate_error(use_sig_digits, x0, x_m_list, i)
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x0, make_table(x_m_list, f_list, errors)
+                return x0, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
 def punto_fijo(function, g, x0, tol, n, use_sig_digits=False):
     errors = [100]
@@ -136,19 +136,19 @@ def punto_fijo(function, g, x0, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x0, make_table(x_m_list, f_list, errors)
+            return x0, table(x_m_list, f_list, errors)
 
         if i > 0:
             error = calculate_error(use_sig_digits, x0, x_m_list, i)
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x0, make_table(x_m_list, f_list, errors)
+                return x0, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
-def raices_multiples2(function, x0, tol, n, use_sig_digits=False):
+def raices_multiples(function, x0, tol, n, use_sig_digits=False):
     errors = [100]
     x_m_list = []
     f_list = []
@@ -167,17 +167,17 @@ def raices_multiples2(function, x0, tol, n, use_sig_digits=False):
         f_list.append(f_x_m)
 
         if f_x_m == 0:
-            return x0, make_table(x_m_list, f_list, errors)
+            return x0, table(x_m_list, f_list, errors)
 
         if i > 0:
             error = calculate_error(use_sig_digits, x0, x_m_list, i)
             errors.append(error)
             if error < tol:
                 plot_results(function, x_m_list)
-                return x0, make_table(x_m_list, f_list, errors)
+                return x0, table(x_m_list, f_list, errors)
 
     plot_results(function, x_m_list)
-    return None, make_table(x_m_list, f_list, errors)
+    return None, table(x_m_list, f_list, errors)
 
 def calculate_error(use_sig_digits, x_m, x_list, index):
     if use_sig_digits:
@@ -186,7 +186,7 @@ def calculate_error(use_sig_digits, x_m, x_list, index):
         error = abs(x_m - x_list[index - 1])
     return error
 
-def make_table(x_m_list, f_list, errors):
+def table(x_m_list, f_list, errors):
     return pd.DataFrame({
         'X_m': x_m_list,
         'f(X_m)': f_list,

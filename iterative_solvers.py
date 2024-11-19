@@ -3,7 +3,7 @@ import scipy as sp
 import pandas as pd
 
 
-def make_tableMat(x_m_list, errores):
+def tableMat(x_m_list, errores):
     table = pd.DataFrame(x_m_list[1:], columns=x_m_list[0])
     table["Error"] = errores
     return table
@@ -16,7 +16,7 @@ def calculate_error(X, X_L, error_rel):
         error = np.max(np.abs(X - X_L)) / np.max(np.abs(X))
     return error
 
-def rad_esp(T):
+def radio_espectral(T):
     eig = np.linalg.eigvals(T)
     return np.max(np.abs(eig))
 
@@ -39,7 +39,7 @@ def Jacobi(A, b, X_i, tol, niter, error_rel=False):
     C = np.linalg.inv(D) @ bm
 
     if np.allclose(Am @ X, bm, atol=tol):
-        return make_tableMat(X_val, errores)
+        return tableMat(X_val, errores)
 
     for _ in range(1, niter):
         X_L = X
@@ -50,7 +50,7 @@ def Jacobi(A, b, X_i, tol, niter, error_rel=False):
         errores.append(error)
 
         if error < tol:
-            return X, make_tableMat(X_val, errores), rad_esp(T)
+            return X, tableMat(X_val, errores), radio_espectral(T)
 
 def Gauss_Seidel(A, b, X_i, tol, niter, error_rel=False):
     errores = [100]
@@ -71,7 +71,7 @@ def Gauss_Seidel(A, b, X_i, tol, niter, error_rel=False):
     C = np.linalg.inv(D - L) @ bm
 
     if np.allclose(Am @ X, bm, atol=tol):
-        return make_tableMat(X_val, errores)
+        return tableMat(X_val, errores)
 
     for _ in range(1, niter):
         X_L = X
@@ -82,7 +82,7 @@ def Gauss_Seidel(A, b, X_i, tol, niter, error_rel=False):
         errores.append(error)
 
         if error < tol:
-            return X, make_tableMat(X_val, errores), rad_esp(T)
+            return X, tableMat(X_val, errores), radio_espectral(T)
 
 def SOR(A, b, X_i, tol, niter, w, error_rel=False):
     errores = [100]
@@ -103,7 +103,7 @@ def SOR(A, b, X_i, tol, niter, w, error_rel=False):
     C = w * np.linalg.inv(D - w * L) @ bm
 
     if np.allclose(Am @ X, bm, atol=tol):
-        return make_tableMat(X_val, errores)
+        return tableMat(X_val, errores)
 
     for _ in range(1, niter):
         X_L = X
@@ -114,12 +114,4 @@ def SOR(A, b, X_i, tol, niter, w, error_rel=False):
         errores.append(error)
 
         if error < tol:
-            return X, make_tableMat(X_val, errores), rad_esp(T)
-
-"""A = [[10, 5, 6],[-2, 8, 1],[-1, -1, 4]]
-b = [15,15,20]
-X_i = [1,1,1]
-print(SOR(A,b,X_i,0.0005,100,1.1))
-print(Gauss_Seidel(A,b,X_i,0.0005,100, True))  """
-    
-
+            return X, tableMat(X_val, errores), radio_espectral(T)
