@@ -16,4 +16,4 @@ EL proyecto es sobre varios metodos numericos los cuales son:
 
 estos metodos estan implementados desde el URL:
 
-la cual es una pagina creada mediante streamlit
+la cual es una pagina creada mediante streamlit community cloud
