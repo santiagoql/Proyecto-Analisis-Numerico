@@ -1,7 +1,5 @@
 import numpy as np
-import scipy as sp 
 import pandas as pd
-import matplotlib.pyplot as plt
 
 def tableMat(x_m_list, errores):
     table = pd.DataFrame(x_m_list[1:], columns=x_m_list[0])
