@@ -3,6 +3,7 @@ Por Santiago Quintero Longas
 
 EL proyecto es sobre varios metodos numericos los cuales son:
 
+Metodos no lineales y iterativos:
 
 - Bisección
 - Regla Falsa
@@ -13,6 +14,11 @@ EL proyecto es sobre varios metodos numericos los cuales son:
 - Jacobi
 - Gauss-Seidel
 - SOR
+
+Metodos de interpolación:
+- Lagrange
+- Spline (Lineal, Cuadrático, Cúbico)
+- Diferencias de newton
 
 estos metodos estan implementados desde el URL: https://gqigrrsbrtgedetb8ngrnz.streamlit.app/
 
