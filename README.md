@@ -14,6 +14,6 @@ EL proyecto es sobre varios metodos numericos los cuales son:
 - Gauss-Seidel
 - SOR
 
-estos metodos estan implementados desde el URL:
+estos metodos estan implementados desde el URL: https://gqigrrsbrtgedetb8ngrnz.streamlit.app/
 
 la cual es una pagina creada mediante streamlit community cloud
