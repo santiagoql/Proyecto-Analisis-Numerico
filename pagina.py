@@ -47,7 +47,7 @@ method = st.sidebar.selectbox(
     "Selecciona un Método:",
     [
         "Bisección", "Regla Falsa", "Secante", "Newton", "Punto Fijo",
-        "Raíces Múltiples 2", "Jacobi", "Gauss-Seidel", "SOR",
+        "Raíces Múltiples", "Jacobi", "Gauss-Seidel", "SOR",
         "Spline Lineal", "Spline Cuadrático", "Spline Cúbico",
         "Lagrange", "Diferencias de Newton"
     ],
@@ -85,7 +85,7 @@ iterative_methods_dict = {
     "Secante": iterative_methods.secante_pagina,
     "Newton": iterative_methods.newton_pagina,
     "Punto Fijo": iterative_methods.punto_fijo_pagina,
-    "Raíces Múltiples 2": iterative_methods.raices_multiples_pagina,
+    "Raíces Múltiples": iterative_methods.raices_multiples_pagina,
     "Jacobi": iterative_methods.jacobi_pagina,
     "Gauss-Seidel": iterative_methods.gauss_seidel_pagina,
     "SOR": iterative_methods.SOR_pagina,
@@ -100,8 +100,13 @@ with calculation_container:
     if method in interpolation_methods:
         cols = st.columns(2)  # Interpolación requiere 2 columnas
         interpolation_methods[method](cols, error, tol)
-    elif method in iterative_methods_dict:
-        cols = st.columns(3)  # Iterativos requieren más espacio para ecuaciones
+    elif method in ["Newton", "Raíces Múltiples", "Jacobi", "Gauss-Seidel", "SOR"]:
+        # Estos métodos requieren exactamente 2 columnas
+        cols = st.columns(2)
+        iterative_methods_dict[method](cols, error, tol)
+    else:
+        # Otros métodos iterativos pueden requerir más columnas (por ejemplo, 3)
+        cols = st.columns(3)
         iterative_methods_dict[method](cols, error, tol)
 
 # Pie de página
