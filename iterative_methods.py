@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-import math
 import scipy as sp
 
 import MetodosNoLineales
@@ -130,9 +129,27 @@ def secante_pagina(cols,error, tol):
         st.write(aprox)
         st.dataframe(table)
 
+def raices_multiples_pagina(cols, error, tol):
+    col1, col2 = cols
+    function = st.text_input('Ingrese la función a evaluar', value='np.exp(-x) + x**2 -13')
+    function = eval(f'lambda x: {function}')
+    with col1:
+        x0 = st.number_input('Valor de x0',step=1.,format="%.4f", value=0.0)
+    with col2:
+        n = st.number_input('# Iteraciones', value=100)
+
+    if error == "Decimales Correctos":
+        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n)
+        st.write(aprox)
+        st.dataframe(table)
+    else:
+        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n,True)
+        st.write(aprox)
+        st.dataframe(table)
+
 def newton_pagina(cols, error, tol):
     col1, col2 = cols
-    function = st.text_input('Ingrese la función a evaluar', value='math.exp(-x) + x**2 -13')
+    function = st.text_input('Ingrese la función a evaluar', value='np.exp(-x) + x**2 -13')
     function = eval(f'lambda x: {function}')
     with col1:
         x0 = st.number_input('Valor de x0',step=1.,format="%.4f", value=0.0)
@@ -153,7 +170,7 @@ def punto_fijo_pagina(cols, error, tol):
     function = st.text_input('Ingrese la función a evaluar', value='np.exp(-x) + x**2 -13')
     function = eval(f'lambda x: {function}')
     with col1:
-        x0 = st.number_input('Valor de x0',step=1.,format="%.4f", value = 0.0)
+        x0 = st.number_input('Valor de x0',step=1.,format="%.4f", value=0.0)
     with col2:
         g = st.text_input('Ingrese g(x)', value='np.exp(-x) + x**2 -13')
     g = eval(f'lambda x: {g}')
@@ -161,29 +178,11 @@ def punto_fijo_pagina(cols, error, tol):
         n = st.number_input('# Iteraciones', value=100)
 
     if error == "Decimales Correctos":
-        aprox, table = MetodosNoLineales.punto_fijo(function, g,x0, tol, n)
+        aprox, table = MetodosNoLineales.punto_fijo(function, g, x0, tol, n)
         st.write(aprox)
         st.dataframe(table)
     else:
-        aprox, table = MetodosNoLineales.punto_fijo(function, g,x0, tol, n,True)
-        st.write(aprox)
-        st.dataframe(table)
-
-def raices_multiples2_pagina(cols, error, tol):
-    col1, col2 = cols
-    function = st.text_input('Ingrese la función a evaluar', value='math.exp(-x) + x**2 -13')
-    function = eval(f'lambda x: {function}')
-    with col1:
-        x0 = st.number_input('Valor de x0',step=1.,format="%.4f", value=0.0)
-    with col2:
-        n = st.number_input('# Iteraciones', value=100)
-
-    if error == "Decimales Correctos":
-        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n)
-        st.write(aprox)
-        st.dataframe(table)
-    else:
-        aprox, table = MetodosNoLineales.raices_multiples(function, x0, tol, n,True)
+        aprox, table = MetodosNoLineales.punto_fijo(function, g, x0, tol, n, True)
         st.write(aprox)
         st.dataframe(table)
 
@@ -266,3 +265,7 @@ def SOR_pagina(cols, error, tol):
         st.write(aprox)
         st.write("El radio espectral de la matriz de transformación es: " + str(radio))
         st.dataframe(table)  
+
+
+
+
