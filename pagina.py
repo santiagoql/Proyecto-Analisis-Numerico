@@ -1,7 +1,6 @@
 import streamlit as st
 import iterative_methods
 import interpolacion_methods
-import matplotlib.pyplot as plt
 
 # Personalización de la apariencia general
 st.set_page_config(
